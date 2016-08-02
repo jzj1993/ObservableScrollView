@@ -14,7 +14,7 @@ import static com.jzj.observablescrollview.ObservableScrollView.OnScrollListener
 import static com.jzj.observablescrollview.ObservableScrollView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL;
 
 /**
- * 可监听滚动的ScrollView
+ * ScrollView with scroll state change observer
  */
 public class ObservableScrollView extends ScrollView {
 
@@ -42,7 +42,9 @@ public class ObservableScrollView extends ScrollView {
         void onScroll(ObservableScrollView view, boolean isTouchScroll, int l, int t, int oldl, int oldt);
     }
 
-    private static final int CHECK_SCROLL_STOP_DELAY_MILLIS = 80; // 间隔时长要合适
+    private static final boolean DEBUG = false;
+
+    private static final int CHECK_SCROLL_STOP_DELAY_MILLIS = 80;
     private static final int MSG_SCROLL = 1;
 
     private boolean mIsTouched = false;
@@ -113,8 +115,8 @@ public class ObservableScrollView extends ScrollView {
             setScrollState(SCROLL_STATE_TOUCH_SCROLL);
         } else {
             setScrollState(SCROLL_STATE_FLING);
+            restartCheckStopTiming();
         }
-        restartCheckStopTiming();
         if (mOnScrollListener != null) {
             mOnScrollListener.onScroll(this, mIsTouched, l, t, oldl, oldt);
         }
@@ -135,6 +137,7 @@ public class ObservableScrollView extends ScrollView {
             case MotionEvent.ACTION_CANCEL:
                 log("handleEvent, action = " + ev.getAction());
                 mIsTouched = false;
+                restartCheckStopTiming();
                 break;
         }
     }
@@ -150,6 +153,8 @@ public class ObservableScrollView extends ScrollView {
     }
 
     private void log(String obj) {
-        Log.d(getClass().getSimpleName(), obj);
+        if (DEBUG) {
+            Log.d(getClass().getSimpleName(), obj);
+        }
     }
 }
