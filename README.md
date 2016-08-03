@@ -1,7 +1,9 @@
 # ObservableScrollView
 
-ScrollView with scroll state change observer
+ScrollView with scroll state change observer.
 
+《ScrollView滚动事件和滚动状态（开始、停止）的监听实现》
+http://www.paincker.com/observable-scroll-view
 
 ## Usage
 
