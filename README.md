@@ -8,23 +8,27 @@ ScrollView with scroll state change observer
 gradle
 
 ```groovy
-allprojects {
-    repositories {
-        ...
-        maven {
-            url 'https://dl.bintray.com/jzj1993/maven/'
-        }
-    }
-}
-
-
 dependencies {
     ...
-    compile 'com.jzj.view:ObservableScrollView:0.0.1'
+    compile 'com.jzj.view:ObservableScrollView:0.0.2'
 }
 ```
 
 project
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<com.jzj.view.ObservableScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
+</com.jzj.view.ObservableScrollView>
+```
 
 ```java
 mScrollView = (ObservableScrollView) findViewById(R.id.scroll_view);
